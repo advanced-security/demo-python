@@ -1,3 +1,4 @@
+import os
 import sys
 sys.path.append('.')
 
@@ -29,7 +30,7 @@ if __name__ == "__main__":
         except Exception as err:
             print(f'[!] Error Occurred: {err}')
 
-    flaskapp.run('0.0.0.0', debug=True)
+    flaskapp.run('0.0.0.0', debug=bool(os.environ.get('DEBUG', False)))
     
     cursor.close()
     database.close()
