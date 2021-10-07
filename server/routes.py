@@ -16,12 +16,16 @@ def index():
             "SELECT * FROM books WHERE name LIKE '%" + name + "%'"
         )
         books = [Book(*row) for row in cursor]
+        if len(books) == 0:
+            return make_response(f"No search results for Name: {name}", 404)
 
     elif author:
         cursor.execute(
             "SELECT * FROM books WHERE author LIKE '%" + author + "%'"
         )
         books = [Book(*row) for row in cursor]
+        if len(books) == 0:
+            return make_response(f"No search results for Author: {author}", 404)
 
     else:
         cursor.execute("SELECT name, author, read FROM books")
