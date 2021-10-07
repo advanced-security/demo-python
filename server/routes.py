@@ -1,7 +1,7 @@
 
 from flask import request, render_template, make_response
 
-from server.webapp import flaskapp, db
+from server.webapp import flaskapp, cursor
 from server.models import Book
 
 
@@ -12,20 +12,23 @@ def index():
     read = bool(request.args.get('read'))
 
     if name:
-        result = db.engine.execute(
-            "SELECT * FROM Book WHERE name LIKE '%" + name + "%'"
+        cursor.execute(
+            "SELECT * FROM books WHERE name LIKE '%" + name + "%'"
         )
-        books = [row for row in result]
+        books = [Book(*row) for row in cursor]
         if len(books) == 0:
             return make_response(f"Search Result not found: {name}", 404)
+
     elif author:
-        result = db.engine.execute(
-            "SELECT * FROM Book WHERE author LIKE '%" + author + "%'"
+        cursor.execute(
+            "SELECT * FROM books WHERE author LIKE '%" + author + "%'"
         )
-        books = [row for row in result]
+        books = [Book(*row) for row in cursor]
         if len(books) == 0:
             return make_response(f"Search Result not found: {author}", 404)
+
     else:
-        books = Book.query.all()
-    
+        cursor.execute("SELECT name, author, read FROM books")
+        books = [Book(*row) for row in cursor]
+
     return render_template('books.html', books=books)

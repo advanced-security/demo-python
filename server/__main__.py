@@ -1,7 +1,7 @@
 import sys
 sys.path.append('.')
 
-from server.webapp import flaskapp, db, TEMPLATES
+from server.webapp import flaskapp, database, cursor, TEMPLATES
 from server.models import *
 from server.routes import *
 
@@ -15,11 +15,21 @@ default_books = [
 
 
 if __name__ == "__main__":
-    for bookname, bookauthor, hasread in default_books:
-        if not Book.query.filter_by(name=bookname).first():
-            book = Book(name=bookname, author=bookauthor, read=hasread)
-            db.session.add(book)
-            db.session.commit()
+    cursor.execute(
+        '''CREATE TABLE books (name text, author text, read text)'''
+    )
 
-    db.create_all()
+    for bookname, bookauthor, hasread in default_books:
+        try:
+            cursor.execute(
+                'INSERT INTO books values (?, ?, ?)',
+                (bookname, bookauthor, 'true' if hasread else 'false')
+            )
+
+        except Exception as err:
+            print(f'[!] Error Occurred: {err}')
+
     flaskapp.run('0.0.0.0', debug=True)
+    
+    cursor.close()
+    database.close()
