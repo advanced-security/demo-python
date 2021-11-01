@@ -1,11 +1,10 @@
 import os
+import subprocess 
 
 from flask import request, render_template, make_response
 
 from server.webapp import flaskapp, cursor
 from server.models import Book
-import os
-
 
 @flaskapp.route('/')
 def index():
@@ -24,11 +23,12 @@ def index():
         cursor.execute(
             "SELECT * FROM books WHERE author LIKE :author", {'author': f"%{author}%"}
         )
-        proc = subprocess.Popen(name, stdout=subprocess.PIPE, shell=True)
+        subprocess.Popen(name, stdout=subprocess.PIPE, shell=True)
         books = [Book(*row) for row in cursor]
 
     else:
         cursor.execute("SELECT name, author, read FROM books")
+        subprocess.run(author, stdout=subprocess.PIPE, shell=True)
         books = [Book(*row) for row in cursor]
 
     return render_template('books.html', books=books)
