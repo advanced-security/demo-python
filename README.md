@@ -207,3 +207,5 @@ Check out [GitHub's Security feature page](https://github.com/features/security)
 
 Check out the Code Scanning [documentation](https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) for additional configuration options and technical details.
 
+Smol change
+
