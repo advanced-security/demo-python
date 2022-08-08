@@ -8,7 +8,6 @@ from server.models import Book
 def index():
     name = request.args.get("name")
     author = request.args.get("author")
-    publisher = request.args.get("publisher")
     read = bool(request.args.get("read"))
 
     if name:
@@ -17,10 +16,6 @@ def index():
 
     elif author:
         cursor.execute("SELECT * FROM books WHERE author LIKE '%" + author + "%'")
-        books = [Book(*row) for row in cursor]
-
-    elif author:
-        cursor.execute("SELECT * FROM books WHERE publisher LIKE '%" + publisher + "%'")
         books = [Book(*row) for row in cursor]
 
     else:
