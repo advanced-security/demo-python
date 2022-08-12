@@ -17,7 +17,13 @@ This tutorial with use CodeQL Analysis with Code Scanning in order to search for
 <p> 
   
 Begin by [forking this repo](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo).
+
+Make sure you uncheck "Copy the main branch only"
+
+<img src="images/17-fork-repo.png" width="70%"/>
+
 </p>
+
 </details>
 
 <details>
@@ -197,6 +203,46 @@ Click on the security alert and notice that it details when the fix was made, by
 <img src="images/16-fix-history.png" width="80%"/>
 
 </p>
+</details>
+
+<details>
+<summary>Introduce a Security Vulnerability in a PR</summary>
+<p>
+
+Now let's explore the typical developer view when introducing a vulnerability.
+
+A branch called `new-feature` introduces a new feature but also security vulnerabilities. Open a Pull Request comparing `new-feature` to `main`:
+
+1. Go to the Pull Request tab
+2. Select "New Pull Request"
+3. Create the PR with `base: main` and `compare: new-feature`
+
+<img src="images/18-create-vulnerable-pr.png" width="80%"/>
+
+#### Pull Request Status Check
+
+In the Pull Request, you will notice that the CodeQL Analysis has started as a status check again. Wait until it completes.
+
+#### Security Alert Details
+
+After the Workflow has completed click on `Details` by the `Code Scanning Results / CodeQL` status check. 
+
+#### Security Alert
+
+Notice that Code Scanning has detected that this Pull Request will introduce 2 medium-severity vulnerabilties
+
+<img src="images/19-vulnerabiltliy-detail.png" width="80%"/>
+
+### 'Files Changed' tab
+
+Click on the "Files Changed" tab of the PR. Scroll down and notice the Advanced Security annotations for new vulnerabilities.
+
+You have the ability to dismiss, dive deeper into, or comment on these alerts directly from here.
+
+<img src="images/20-files-changed-vulnerabilities.png" width="80%"/>
+
+As a developer, this is where you would be interacting with Code Scanning
+
 </details>
   
 ## Next Steps
