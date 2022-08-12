@@ -233,7 +233,7 @@ Notice that Code Scanning has detected that this Pull Request will introduce 2 m
 
 <img src="images/19-vulnerabiltliy-detail.png" width="80%"/>
 
-### 'Files Changed' tab
+#### 'Files Changed' tab
 
 Click on the "Files Changed" tab of the PR. Scroll down and notice the Advanced Security annotations for new vulnerabilities.
 
