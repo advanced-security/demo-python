@@ -18,7 +18,7 @@ This tutorial with use CodeQL Analysis with Code Scanning in order to search for
   
 Begin by [forking this repo](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo).
 
-Make sure you uncheck "Copy the main branch only"
+NOTE: Make sure you uncheck "Copy the `main` branch only"
 
 <img src="images/17-fork-repo.png" width="70%"/>
 
@@ -215,7 +215,12 @@ A branch called `new-feature` introduces a new feature but also security vulnera
 
 1. Go to the Pull Request tab
 2. Select "New Pull Request"
-3. Create the PR with `base: main` and `compare: new-feature`
+3. Create the PR with 
+    - `base repository: <YOUR FORK>`
+    - `head repository: <YOUR FORK>`
+    - `base: main`
+    - `compare: new-feature`
+4. _If you don't see the `new-feature` branch, change the `head repository: octodemo/advanced-security-python`_ 
 
 <img src="images/18-create-vulnerable-pr.png" width="80%"/>
 
@@ -233,7 +238,7 @@ Notice that Code Scanning has detected that this Pull Request will introduce 2 m
 
 <img src="images/19-vulnerabiltliy-detail.png" width="80%"/>
 
-### 'Files Changed' tab
+#### 'Files Changed' tab
 
 Click on the "Files Changed" tab of the PR. Scroll down and notice the Advanced Security annotations for new vulnerabilities.
 
