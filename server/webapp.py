@@ -14,3 +14,5 @@ database_uri = os.environ.get('SQLITE_URI', ':memory:')
 
 database = sqlite3.connect(database_uri, check_same_thread=False)
 cursor = database.cursor()
+
+api_token = "12312321321"
