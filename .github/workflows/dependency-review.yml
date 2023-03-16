@@ -5,7 +5,7 @@ permissions:
   contents: read
 
 jobs:
-  dependency-review:
+  dependency-reviews:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
