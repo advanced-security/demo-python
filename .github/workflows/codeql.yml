@@ -101,16 +101,11 @@ jobs:
       run: |
         echo "workspace: ${{github.workspace}}"
         echo "repository: ${{github.repository}}"
-        ls
-        mv ../results/*.* .
+        ls ../results
+        cp ../results/*.* .
 
     - name: Commit report
-      run: |
-        git config --global user.name 'bizthor'
-        git config --global user.email 'victormarting@gmail.com'
-        git add -A
-        git commit -am "Automated update"
-        git push    
+      uses: actions4git/add-commit-push@v1
 
         
         
