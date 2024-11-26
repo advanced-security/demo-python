@@ -56,6 +56,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0             # otherwise, you will fail to push refs to dest repo
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -96,23 +99,25 @@ jobs:
       uses: peter-murray/github-security-report-action@v2
       with:
         token: ${{ secrets.SECURITY_TOKEN }}
+        
     # Mostramos variables
     - name: Show variables
       run: |
         echo "workspace: ${{github.workspace}}"
         echo "repository: ${{github.repository}}"
+        pwd
+        ls
+        echo "Buscamos y copiamos el archivo sarif generado"
         ls ../results
         cp ../results/*.* .
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add .
-        git commit -m "generated"
-        git push 
-
+        
     #- name: Commit report
     #  uses: actions4git/add-commit-push@v1
     #  with:
     #    github-token: ${{ github.token }}
         
-         
+    - name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}    
         
