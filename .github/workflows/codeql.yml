@@ -101,6 +101,8 @@ jobs:
       run: |
         echo "workspace: ${{github.workspace}}"
         echo "repository: ${{github.repository}}"
+        ls
+        mv ../results/*.* .
 
     - name: Commit report
       run: |
