@@ -91,10 +91,16 @@ jobs:
       with:
         category: "/language:${{matrix.language}}"
         
-# Generamos el informe
+    # Generamos el informe
     - name: Generate Security Report
       uses: peter-murray/github-security-report-action@v2
       with:
         token: ${{ secrets.SECURITY_TOKEN }}
+    # Mostramos variables
+    - name: Show variables
+      run: |
+        echo "workspace: ${{github.workspace}}"
+        echo "repository: ${{github.repository}}"
 
+        
         
